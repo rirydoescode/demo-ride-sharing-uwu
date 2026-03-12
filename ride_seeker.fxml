@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.demo.RideSeekerController"
+      spacing="10" style="-fx-padding: 20;">
+
+    <Label text="Campus Ride Seeker" style="-fx-font-size: 18px;"/>
+
+    <!-- Top controls -->
+    <TextField fx:id="destinationField" promptText="Destination"/>
+    <TextField fx:id="departureField" promptText="Departure Time (optional)"/>
+    <HBox spacing="10">
+        <Label text="Provider Gender:"/>
+        <ChoiceBox fx:id="genderFilterChoice"/>
+        <Button text="Search Rides" onAction="#handleSearch"/>
+        <Button text="View Map" onAction="#handleViewMap"/>
+    </HBox>
+
+    <!-- Route selection -->
+    <HBox spacing="10">
+        <Label text="Select Point:"/>
+        <ChoiceBox fx:id="pointChoice"/>
+        <Button text="Show Route" onAction="#drawMapRoute"/>
+    </HBox>
+
+    <!-- Scrollable content -->
+    <ScrollPane fitToWidth="true" prefHeight="500">
+        <VBox spacing="10" alignment="CENTER">
+
+            <ListView fx:id="ridesList" prefHeight="200" prefWidth="600"/>
+
+            <!-- Request + Chat buttons -->
+            <HBox spacing="10">
+                <TextField fx:id="rideIdField" promptText="Ride ID to request" editable="false"/>
+                <Button text="Send Request" onAction="#handleRequest"/>
+                <Button fx:id="chatButton" text="Chat with Provider"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <TextField fx:id="totalCostField" promptText="Total Cost" editable="false"/>
+                <TextField fx:id="costPerSeatField" promptText="Cost per Seat" editable="false"/>
+            </HBox>
+
+            <AnchorPane fx:id="mapPane" prefWidth="600" prefHeight="400">
+                <ImageView fx:id="mapView" fitWidth="600" preserveRatio="true" visible="false"/>
+            </AnchorPane>
+
+            <Label text="My Requests" style="-fx-font-size: 16px;"/>
+            <ListView fx:id="myRequestsList" prefHeight="200" prefWidth="600"/>
+            <Button text="Refresh My Requests" onAction="#loadMyRequests"/>
+
+            <Label text="* Each request shows the date it was made, status, and provider info"
+                   style="-fx-font-size: 10px; -fx-text-fill: gray;"/>
+        </VBox>
+    </ScrollPane>
+</VBox>

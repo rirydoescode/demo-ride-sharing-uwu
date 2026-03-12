@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.demo.RideProviderController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label text="Campus Ride Provider" style="-fx-font-size: 18px;"/>
+
+    <!-- Ride info -->
+    <TextField fx:id="carField" promptText="Car Model"/>
+    <TextField fx:id="destinationField" promptText="Destination"/>
+    <TextField fx:id="departureField" promptText="Departure Time"/>
+    <TextField fx:id="seatsField" promptText="Total Seats"/>
+    <TextField fx:id="totalCostField" promptText="Total Cost"/>
+    <ChoiceBox fx:id="genderChoice" prefWidth="150"/>
+
+    <Button text="Add Ride" onAction="#handleAddRide"/>
+    <Button text="View Map" onAction="#handleViewMap"/>
+
+    <!-- Scrollable area for rides, requests, and map -->
+    <ScrollPane fitToWidth="true" prefHeight="600">
+        <VBox spacing="10" alignment="CENTER">
+
+            <!-- Point selection for routing -->
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Select Target Point:"/>
+                <ChoiceBox fx:id="pointChoice" prefWidth="100"/>
+            </HBox>
+
+            <!-- Map -->
+            <AnchorPane fx:id="mapPane" prefWidth="600" prefHeight="400">
+                <ImageView fx:id="mapView" fitWidth="600" preserveRatio="true" visible="false"/>
+            </AnchorPane>
+
+            <!-- My Rides -->
+            <Label text="My Rides" style="-fx-font-size: 16px;"/>
+            <ListView fx:id="myRidesList" prefHeight="150" prefWidth="400"/>
+
+            <!-- Incoming Requests -->
+            <Label text="Incoming Requests" style="-fx-font-size: 16px;"/>
+            <ListView fx:id="requestsList" prefHeight="150" prefWidth="400"/>
+
+            <!-- Chat controls -->
+            <HBox spacing="10">
+                <Button text="Accept" onAction="#handleAccept"/>
+                <Button text="Reject" onAction="#handleReject"/>
+                <Button text="Refresh" onAction="#loadRequests"/>
+                <ChoiceBox fx:id="chatSelector" prefWidth="200"/>
+                <Button fx:id="chatButton" text="Open Chat"/>
+            </HBox>
+
+        </VBox>
+    </ScrollPane>
+</VBox>
